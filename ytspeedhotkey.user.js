@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Youtube Speed Hotkey
 // @namespace    ytspeedhotkey
-// @version      0.0.1
+// @version      0.0.3
 // @description  Toogle Youtube playback speed with a hotkey (Q)
 // @author       DerEnderKeks
 // @website      https://github.com/DerEnderKeks/YTSpeedHotkey
@@ -14,19 +14,13 @@
 // ==/UserScript==
 
 (function() {
-    var speed = 1;
-
     this.addEventListener('keypress', (event) => {
         if (event.code === 'KeyQ') {
-            speed = speed === 2 ? 1 : 2;
             var videos = document.getElementsByTagName('video');
-
-            for (var i = 0; i < videos.length; i++) {
-                if (!videos[i]) continue;
-                video = videos[i];
-                video.playbackRate = speed;
+            for (let video of videos) {
+                video.playbackRate = video.playbackRate === 2 ? 1 : 2;
+                console.log(`Changed video speed to ${video.playbackRate}x`);
             }
-            console.log('Changed video speed to ' + speed);
         }
     });
 })();
